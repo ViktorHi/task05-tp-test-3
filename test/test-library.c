@@ -13,13 +13,36 @@ int test_check_code(){
 	return E_FAIL;
 }
 
-int test_choice_menu(){
+int test_select_callback(){
 	void* data;
 	int argc =1;
 	char *argv="_select_callback()";
 	char *azColName="working: ";
-	_select_callback(data, argc, &argv, &azColName);
-	return S_OK;
+	if(_select_callback(data, argc, &argv, &azColName)==0)
+		return S_OK;
+	return E_FAIL;
+}
+
+int test_is_date_correct(){
+	char* is_correct="12-12-2012";
+	if(_is_date_correct(is_correct)==0)
+		return S_OK;
+	return E_FAIL;
+}
+
+int test_is_date2_correct(){
+	char* is_correct="12-1-20120";
+	int i;
+	if((i=_is_date_correct(is_correct))==0)
+		return S_OK;
+	return E_FAIL;
+}
+
+int test_is_admin(){
+	user_handle handle=NULL;
+	if(is_admin(handle)==0)
+		return S_OK;
+	return E_FAIL;
 }
 
 int run_tests() {
@@ -28,11 +51,24 @@ int run_tests() {
 		return E_FAIL;
 	}
 
-	if (E_FAIL==test_choice_menu()){
-		printf("failed test_choice_menu()\n");
+	if (E_FAIL==test_select_callback()){
+		printf("failed test_select_callback()\n");
 		return E_FAIL;
 	}
 
+	if (E_FAIL==test_is_date_correct()){
+		printf("failed test_is_date_correct()\n");
+		return E_FAIL;
+	}
+
+	if (E_FAIL==test_is_admin()){
+		printf("failed test_is_admin()\n");
+		return E_FAIL;
+	}
+	if (E_FAIL==test_is_date2_correct()){
+		printf("failed test_is_date2_correct()\n");
+		return E_FAIL;
+	}
 	return S_OK;
 }
 
