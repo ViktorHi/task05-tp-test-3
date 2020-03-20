@@ -7,7 +7,7 @@
 int test_check_code(){
 
 	char* err_mess=NULL;
-	if(check_code(1,err_mess)==1){
+	if(check_code(1,err_mess)==0){
 		return S_OK;
 	}
 	return E_FAIL;
