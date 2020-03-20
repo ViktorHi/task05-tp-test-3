@@ -1,5 +1,5 @@
 #include "../include/sum_counter.h"
-
+#include "../include/car_tester.h"
 #define S_OK (0)
 #define E_FAIL (-1)
 
@@ -7,9 +7,21 @@
 int test_check_code(){
 
 	char* err_mess=NULL;
-	if(check_code(1,err_mess)==0){
+	if(check_code(1,err_mess)==1){
 		return S_OK;
 	}
+	return E_FAIL;
+}
+
+int test_check_car(){
+	sqlite3* db;
+	char* car_number;
+	double weight;
+	int i;
+	if((i=check_car(db, car_number, weight))==0){
+		return S_OK;
+	}
+
 	return E_FAIL;
 }
 
@@ -18,6 +30,12 @@ int run_tests() {
 		printf("failed test_check_code()\n");
 		return E_FAIL;
 	}
+
+	if (E_FAIL==test_check_car()){
+		printf("failed test_check_car()\n");
+		return E_FAIL;
+	}
+
 	return S_OK;
 }
 
