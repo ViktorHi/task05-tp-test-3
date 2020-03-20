@@ -1,5 +1,5 @@
 #include "../include/sum_counter.h"
-#include "../include/car_tester.h"
+#include "../include/db_routines.h"
 #define S_OK (0)
 #define E_FAIL (-1)
 
@@ -13,16 +13,13 @@ int test_check_code(){
 	return E_FAIL;
 }
 
-int test_check_car(){
-	sqlite3* db;
-	char* car_number;
-	double weight;
-	int i;
-	if((i=check_car(db, car_number, weight))==0){
-		return S_OK;
-	}
-
-	return E_FAIL;
+int test_choice_menu(){
+	void* data;
+	int argc =1;
+	char *argv="_select_callback()";
+	char *azColName="working: ";
+	_select_callback(data, argc, &argv, &azColName);
+	return S_OK;
 }
 
 int run_tests() {
@@ -31,8 +28,8 @@ int run_tests() {
 		return E_FAIL;
 	}
 
-	if (E_FAIL==test_check_car()){
-		printf("failed test_check_car()\n");
+	if (E_FAIL==test_choice_menu()){
+		printf("failed test_choice_menu()\n");
 		return E_FAIL;
 	}
 

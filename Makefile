@@ -4,7 +4,7 @@ CFLAGS = -I. -Wall -ftest-coverage -fprofile-arcs
 
 autopark: main.o db_routines.o ui.o car_tester.o sum_counter.o 
 	gcc -c test/test-library.c -o obj/test-library.o
-	gcc -o test-library.out obj/test-library.o obj/sum_counter.o obj/car_tester.o $(CFLAGS) -lm -lncurses -Os -lsqlite3
+	gcc -o test-library.out obj/test-library.o obj/sum_counter.o obj/db_routines.o obj/ui.o $(CFLAGS) -lm -lncurses -Os -lsqlite3
 	rm obj/test-library.o
 	gcc -o bin/autopark obj/*.o -lsqlite3
 
